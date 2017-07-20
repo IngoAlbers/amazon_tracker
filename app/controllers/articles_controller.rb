@@ -18,4 +18,10 @@ class ArticlesController < ApplicationController
     item = res.get_element('Item')
     @bla_price = item.get_element('LowestNewPrice').get_element('Amount')
   end
+
+  def search
+    res = Amazon::Ecs.item_search(params[:str], country: 'de')
+
+    @results = res.total_results
+  end
 end
