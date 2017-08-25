@@ -1,2 +1,8 @@
-<%= @bla %>
-<%= @bla_price %>
+<h1>Articles</h1>
+<% @articles.each do |article| %>
+  <%= link_to article.name, "https://www.amazon.de/dp/#{article.asin}" %><br>
+  <%= "€#{article.current_price.to_i / 100},00" %>
+  <br>
+<% end %>
+
+<%= link_to 'Neuen Artikel hinzufügen', new_article_path %>

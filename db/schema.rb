@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170720052307) do
   create_table "articles", force: :cascade do |t|
     t.string "name"
     t.string "asin"
+    t.string "image_url"
   end
 
   create_table "prices", force: :cascade do |t|

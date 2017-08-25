@@ -2,26 +2,45 @@ require 'amazon/ecs'
 
 class ArticlesController < ApplicationController
   def index
+    @articles = Article.all
+  end
 
-    res = Amazon::Ecs.item_search('ruby', country: 'de')
+  def new
+    @article = Article.new
+  end
 
-    item = res.items.first
-    item_attributes = item.get_element('ItemAttributes')
-
-    res = Amazon::Ecs.item_lookup('B01KV1C1D6', { country: 'de' })
+  def create
+    res = Amazon::Ecs.item_lookup(params[:article][:asin], country: 'de')
     item = res.get_element('Item')
-    item_attributes = item.get_element('ItemAttributes')
+    item_attributes = item&.get_element('ItemAttributes')
+    title = item_attributes&.get('Title')
 
-    @bla = item_attributes.get_element('Title')
+    if title.present? && Article.create(asin: params[:article][:asin], name: title)
+      redirect_to articles_path
+    else
+      @article = Article.new
+      render :new
+    end
+  end
 
-    res = Amazon::Ecs.item_lookup('B01KV1C1D6', { response_group: 'Offers', country: 'de' })
-    item = res.get_element('Item')
-    @bla_price = item.get_element('LowestNewPrice').get_element('Amount')
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
   end
 
   def search
     res = Amazon::Ecs.item_search(params[:str], country: 'de')
 
     @results = res.total_results
+  end
+
+  private
+
+  def article_params
+    params.require(:article).permit(:asin)
   end
 end
