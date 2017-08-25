@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(version: 20170720052307) do
   create_table "prices", force: :cascade do |t|
     t.integer "article_id"
     t.date "date"
-    t.integer "amount"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "EUR", null: false
     t.index ["article_id"], name: "index_prices_on_article_id"
   end
 

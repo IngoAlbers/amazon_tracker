@@ -9,7 +9,11 @@ class Article < ApplicationRecord
     item.get_element('LowestNewPrice').get('Amount')
   end
 
+  def last_stored_price
+    prices&.order(date: :desc)&.first&.amount
+  end
+
   def store_current_price
-    prices << Price.create(amount: current_price, date: Date.today) if current_price.present?
+    prices << Price.create(amount: current_price.to_i / 100.0, date: Date.today) if current_price.present?
   end
 end

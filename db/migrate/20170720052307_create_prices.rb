@@ -3,7 +3,7 @@ class CreatePrices < ActiveRecord::Migration[5.1]
     create_table :prices do |t|
       t.references :article
       t.date :date
-      t.integer :amount
+      t.monetize :amount
     end
   end
 end
