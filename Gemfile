@@ -35,7 +35,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+
+gem 'haml-rails'
 
 gem 'amazon-ecs'
 gem 'money-rails'

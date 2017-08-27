@@ -1,0 +1,18 @@
+.container-fluid
+  .col-md-12
+    %h1= 'Artikel'
+
+  .col-md-12
+    %table.table-hover
+      %tr
+        %th.col-md-8= 'Name'
+        %th.col-md-2= 'Letzter Preis'
+        %th.col-md-2
+      - @articles.each do |article|
+        %tr
+          %td.col-md-8= link_to article.name, "https://www.amazon.de/dp/#{article.asin}"
+          %td.col-md-2= humanized_money_with_symbol(article.last_stored_price)
+          %td.col-md-2= link_to article, method: :delete { fa_icon 'trash' }
+
+.container-fluid
+  = link_to 'Neuen Artikel hinzufügen', new_article_path, class: 'btn btn-primary'
