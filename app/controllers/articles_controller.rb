@@ -18,8 +18,10 @@ class ArticlesController < ApplicationController
     title = item_attributes&.get('Title')
 
     if title.present? && Article.create(asin: params[:article][:asin], name: title)
+      flash[:success] = 'Artikel erstellt.'
       redirect_to articles_path
     else
+      flash[:danger] = 'Fehler beim Erstellen.'
       @article = Article.new
       render :new
     end
