@@ -1,8 +1,11 @@
 <h1>Articles</h1>
+<table>
 <% @articles.each do |article| %>
-  <%= link_to article.name, "https://www.amazon.de/dp/#{article.asin}" %><br>
-  <%= humanized_money_with_symbol(article.last_stored_price) %>
-  <br>
+  <tr>
+    <td><%= link_to article.name, "https://www.amazon.de/dp/#{article.asin}" %></td>
+    <td><%= humanized_money_with_symbol(article.last_stored_price) %></td>
+  </tr>
 <% end %>
+</table>
 
-<%= link_to 'Neuen Artikel hinzufügen', new_article_path %>
+<%= link_to 'Neuen Artikel hinzufügen', new_article_path, class: 'btn btn-primary' %>
