@@ -15,5 +15,6 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery.slimscroll
+//= require chartkick
 //= require app
 //= require_tree .

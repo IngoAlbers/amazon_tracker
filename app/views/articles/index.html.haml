@@ -16,5 +16,9 @@
             - link_to article, method: :delete do
               = fa_icon 'trash'
 
+        %tr
+          %td.col-md-12{ colspan: 2 }
+            = line_chart article.prices.map { |price| [price.date, price.amount.to_f] }
+
 .container-fluid
   = link_to 'Neuen Artikel hinzufügen', new_article_path, class: 'btn btn-primary'
